@@ -74,20 +74,16 @@
                                             </div>
                                             
                                             <div class="detail-extralink mb-50">
-                                                    <br>
-                                                    <input type="number" value="1" name="" id="product-quantity" class="w-25 mb-10 product-quantity-{{ p.id }}">
-                                                    <br>
+                                                <br>
+                                                <input type="number" value="1" name="" id="product-quantity" class="w-25 mb-10 product-quantity-{{ p.id }}" min="1" oninput="validity.valid||(value='1');">
+                                                <br>
                                                 <div class="product-extra-link2">
-                                                    
-                                                        <input type="hidden" class="product-pid-{{ p.id }}" value="{{ p.pid }}">
-                                                        <input type="hidden" class="product-image-{{ p.id }}" value="{{ p.image.url }}">
-                                                        <input type="hidden" class="product-id-{{ p.id }}" value="{{ p.id }}">
-                                                        <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}">
-
-                                                    
+                                                    <input type="hidden" class="product-pid-{{ p.id }}" value="{{ p.pid }}">
+                                                    <input type="hidden" class="product-image-{{ p.id }}" value="{{ p.image.url }}">
+                                                    <input type="hidden" class="product-id-{{ p.id }}" value="{{ p.id }}">
+                                                    <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}">
                                                     <button type="submit" class="button button-add-to-cart add-to-cart-btn" data-index="{{ p.id }}" id="add-to-cart-btn"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
                                                     <a aria-label="Add To Wishlist" class="action-btn hover-up add-to-wishlist" data-product-item="{{p.id}}"><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                                 </div>
                                             </div>
                                             <div class="font-xs">
@@ -105,6 +101,20 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                        
+                                        <script>
+                                            document.querySelectorAll('input[type="number"]').forEach(input => {
+                                                input.addEventListener('input', function() {
+                                                    if (this.value < 1) {
+                                                        this.value = 1;
+                                                    }
+                                                });
+                                            });
+                                        </script>
+
+
+
+
                                         <!-- Detail Info -->
                                     </div>
                                 </div>
@@ -199,33 +209,6 @@
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
-                                                        <!-- <div class="col-lg-4">
-                                                            <h4 class="mb-30">Customer reviews</h4>
-                                                            <div class="d-flex mb-30">
-                                                                <h6>{{ average_rating.rating|floatformat:1 }} out of 5.0</h6>
-                                                            </div>
-                                                            <div class="progress">
-                                                                <span>5 star</span>
-                                                                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                                                            </div>
-                                                            <div class="progress">
-                                                                <span>4 star</span>
-                                                                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                                                            </div>
-                                                            <div class="progress">
-                                                                <span>3 star</span>
-                                                                <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
-                                                            </div>
-                                                            <div class="progress">
-                                                                <span>2 star</span>
-                                                                <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
-                                                            </div>
-                                                            <div class="progress mb-30">
-                                                                <span>1 star</span>
-                                                                <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
-                                                            </div>
-                                                            <a href="#" class="font-xs text-muted">How are ratings calculated?</a>
-                                                        </div> -->
                                                     </div>
                                                 </div>
                                                 
