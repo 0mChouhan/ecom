@@ -800,6 +800,7 @@ class ProductRecommender:
         self.product_indices = {product.id: idx for idx, product in enumerate(self.products)}
         self.tfidf_matrix = None
         self.similarity_matrix = None
+        self.categories = {product.id: product.category for product in self.products}
         self._fit()
 
     def _fit(self):
@@ -817,8 +818,15 @@ class ProductRecommender:
             return []
 
         idx = self.product_indices[product_id]
+        target_category = self.categories[product_id]
 
+        # Get similarity scores
         sim_scores = list(enumerate(self.similarity_matrix[idx]))
+
+        # Filter products to include only those in the same category
+        sim_scores = [(i, score) for i, score in sim_scores if self.categories[self.products[i].id] == target_category]
+
+        # Sort by similarity score
         sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
         sim_scores = sim_scores[1:num_recommendations + 1]
         product_indices = [i[0] for i in sim_scores]
